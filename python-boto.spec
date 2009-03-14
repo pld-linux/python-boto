@@ -3,7 +3,7 @@ Summary:	An integrated interface to infrastructural services offered by Amazon W
 Summary(pl.UTF-8):	Zintegrowany interfejs do usług infrastruktury oferowanych przez usługi WWW Amazon
 Name:		python-%{realname}
 Version:	1.2a
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://boto.googlecode.com/files/%{realname}-%{version}.tar.gz
