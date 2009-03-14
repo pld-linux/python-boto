@@ -2,12 +2,12 @@
 Summary:	An integrated interface to infrastructural services offered by Amazon Web Services
 Summary(pl.UTF-8):	Zintegrowany interfejs do usług infrastruktury oferowanych przez usługi WWW Amazon
 Name:		python-%{realname}
-Version:	1.2a
-Release:	3
+Version:	1.6b
+Release:	1
 License:	MIT
 Group:		Libraries/Python
 Source0:	http://boto.googlecode.com/files/%{realname}-%{version}.tar.gz
-# Source0-md5:	e4329f02ad17837b6e4b1269e1ae63e3
+# Source0-md5:	da35ce449ed0be74a3e5d9fff58f9d08
 URL:		http://code.google.com/p/boto/
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
@@ -37,6 +37,9 @@ rm -rf $RPM_BUILD_ROOT
 	--optimize=2
 rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/tests
 
+install -d $RPM_BUILD_ROOT%{_bindir}
+install cq.py s3put $RPM_BUILD_ROOT%{_bindir}
+
 %py_postclean
 
 %clean
@@ -44,4 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc PKG-INFO README doc/*
+%attr(755,root,root) %{_bindir}/cq.py
+%attr(755,root,root) %{_bindir}/s3put
 %{py_sitescriptdir}/boto
