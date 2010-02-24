@@ -37,9 +37,6 @@ rm -rf $RPM_BUILD_ROOT
 	--optimize=2
 rm -rf $RPM_BUILD_ROOT%{py_sitescriptdir}/tests
 
-#install -d $RPM_BUILD_ROOT%{_bindir}
-#install cq.py s3put $RPM_BUILD_ROOT%{_bindir}
-
 %py_postclean
 
 %clean
