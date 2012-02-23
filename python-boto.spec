@@ -2,13 +2,12 @@
 Summary:	An integrated interface to infrastructural services offered by Amazon Web Services
 Summary(pl.UTF-8):	Zintegrowany interfejs do usług infrastruktury oferowanych przez usługi WWW Amazon
 Name:		python-%{realname}
-Version:	2.0
-%define 	beta	b4
-Release:	0.%{beta}.1
+Version:	2.2.2
+Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	http://boto.googlecode.com/files/%{realname}-%{version}%{beta}.tar.gz
-# Source0-md5:	f00ccf9167fee01d6a415bd4ab156171
+Source0:	http://boto.googlecode.com/files/%{realname}-%{version}.tar.gz
+# Source0-md5:	b23b9137abd7286615236ed03929d282
 URL:		http://code.google.com/p/boto/
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
@@ -31,13 +30,13 @@ Group:		Applications
 Requires:	%{name} = %{version}-%{release}
 
 %description -n boto
-Boto is an integrated Python interface to current and future infrastructural
-services offered by Amazon Web Services. 
+Boto is an integrated Python interface to current and future
+infrastructural services offered by Amazon Web Services. 
 
 This package includes sample utilities implemented with this API.
 
 %prep
-%setup -q -n %{realname}-%{version}%{beta}
+%setup -q -n %{realname}-%{version}
 
 %build
 %{__python} setup.py build
@@ -56,7 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc PKG-INFO README 
+%doc PKG-INFO README*
 %{py_sitescriptdir}/boto
 %{py_sitescriptdir}/boto-*.egg-info
 
