@@ -14,7 +14,7 @@ Source0:	https://pypi.python.org/packages/source/b/boto/boto-%{version}.tar.gz
 URL:		https://github.com/boto/boto
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.219
+BuildRequires:	rpmbuild(macros) >= 1.710
 Requires:	python-libs
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
