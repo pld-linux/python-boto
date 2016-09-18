@@ -5,12 +5,12 @@
 Summary:	An integrated interface to infrastructural services offered by Amazon Web Services
 Summary(pl.UTF-8):	Zintegrowany interfejs do usług infrastruktury oferowanych przez usługi WWW Amazon
 Name:		python-%{module}
-Version:	2.38.0
-Release:	4
+Version:	2.42.0
+Release:	1
 License:	MIT
 Group:		Libraries/Python
-Source0:	https://pypi.python.org/packages/source/b/boto/boto-%{version}.tar.gz
-# Source0-md5:	28112f29e9c7b10e12b6917a325e70ce
+Source0:	https://pypi.python.org/packages/c4/bb/28324652bedb4ea9ca77253b84567d1347b54df6231b51822eaaa296e6e0/boto-%{version}.tar.gz
+# Source0-md5:	62b6ef1af3d18f8811f97e311b856dad
 URL:		https://github.com/boto/boto
 BuildRequires:	python-devel
 BuildRequires:	rpm-pythonprov
