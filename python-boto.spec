@@ -6,7 +6,7 @@ Summary:	An integrated interface to infrastructural services offered by Amazon W
 Summary(pl.UTF-8):	Zintegrowany interfejs do usług infrastruktury oferowanych przez usługi WWW Amazon
 Name:		python-%{module}
 Version:	2.42.0
-Release:	2
+Release:	3
 License:	MIT
 Group:		Libraries/Python
 Source0:	https://pypi.python.org/packages/c4/bb/28324652bedb4ea9ca77253b84567d1347b54df6231b51822eaaa296e6e0/boto-%{version}.tar.gz
