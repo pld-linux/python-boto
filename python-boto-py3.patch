@@ -1,0 +1,53 @@
+--- boto-2.49.0/tests/unit/utils/test_utils.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/utils/test_utils.py	2021-02-14 20:42:11.365790376 +0100
+@@ -85,7 +85,7 @@
+         def hmac_hashfunc(cls, msg):
+             if not isinstance(msg, bytes):
+                 msg = msg.encode('utf-8')
+-            return hmac.new(b'mysecretkey', msg)
++            return hmac.new(b'mysecretkey', msg, digestmod=hashlib.md5)
+ 
+         class HMACPassword(Password):
+             hashfunc = hmac_hashfunc
+@@ -95,15 +95,15 @@
+         password.set('foo')
+ 
+         self.assertEquals(str(password),
+-                          hmac.new(b'mysecretkey', b'foo').hexdigest())
++                          hmac.new(b'mysecretkey', b'foo', digestmod=hashlib.md5).hexdigest())
+ 
+     def test_constructor(self):
+-        hmac_hashfunc = lambda msg: hmac.new(b'mysecretkey', msg)
++        hmac_hashfunc = lambda msg: hmac.new(b'mysecretkey', msg, digestmod=hashlib.md5)
+ 
+         password = Password(hashfunc=hmac_hashfunc)
+         password.set('foo')
+         self.assertEquals(password.str,
+-                          hmac.new(b'mysecretkey', b'foo').hexdigest())
++                          hmac.new(b'mysecretkey', b'foo', digestmod=hashlib.md5).hexdigest())
+ 
+ 
+ class TestPythonizeName(unittest.TestCase):
+--- boto-2.49.0/boto/ecs/item.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/boto/ecs/item.py	2021-02-14 20:51:06.116226718 +0100
+@@ -21,7 +21,10 @@
+ 
+ 
+ import xml.sax
+-import cgi
++try:
++    from cgi import escape
++except ImportError:
++    from html import escape
+ from boto.compat import six, StringIO
+ 
+ class ResponseGroup(xml.sax.ContentHandler):
+@@ -67,7 +70,7 @@
+         return None
+ 
+     def endElement(self, name, value, connection):
+-        self._xml.write("%s</%s>" % (cgi.escape(value).replace("&amp;amp;", "&amp;"), name))
++        self._xml.write("%s</%s>" % (escape(value).replace("&amp;amp;", "&amp;"), name))
+         if len(self._nodepath) == 0:
+             return
+         obj = None

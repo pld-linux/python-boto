@@ -1,0 +1,330 @@
+--- boto-2.49.0/tests/integration/s3/test_bucket.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/integration/s3/test_bucket.py	2021-02-14 20:03:03.481843289 +0100
+@@ -26,7 +26,10 @@
+ Some unit tests for the S3 Bucket
+ """
+ 
+-from mock import patch, Mock
++try:
++    from mock import patch, Mock
++except ImportError:
++    from unittest.mock import patch, Mock
+ import unittest
+ import time
+ 
+--- boto-2.49.0/tests/integration/s3/test_https_cert_validation.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/integration/s3/test_https_cert_validation.py	2021-02-14 20:03:18.711760781 +0100
+@@ -38,7 +38,7 @@ Note that this test assumes two external
+ import os
+ import ssl
+ import unittest
+-import mock
++from tests.compat import mock
+ 
+ from nose.plugins.attrib import attr
+ 
+--- boto-2.49.0/tests/integration/s3/test_multipart.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/integration/s3/test_multipart.py	2021-02-14 20:03:12.025130339 +0100
+@@ -37,7 +37,7 @@ import unittest
+ import time
+ from boto.compat import StringIO
+ 
+-import mock
++from tests.compat import mock
+ 
+ import boto
+ from boto.s3.connection import S3Connection
+--- boto-2.49.0/tests/unit/auth/test_stsanon.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/auth/test_stsanon.py	2021-02-14 19:57:30.110315984 +0100
+@@ -20,7 +20,10 @@
+ # IN THE SOFTWARE.
+ #
+ import copy
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ from tests.unit import unittest
+ 
+ from boto.auth import STSAnonHandler
+--- boto-2.49.0/tests/unit/cloudformation/test_connection.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/cloudformation/test_connection.py	2021-02-14 20:01:15.389095544 +0100
+@@ -1,7 +1,10 @@
+ #!/usr/bin/env python
+ import unittest
+ from datetime import datetime
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ from tests.unit import AWSMockServiceTestCase
+ from boto.cloudformation.connection import CloudFormationConnection
+--- boto-2.49.0/tests/unit/cloudsearch2/test_document.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/cloudsearch2/test_document.py	2021-02-14 20:00:05.506140799 +0100
+@@ -4,7 +4,10 @@ from boto.cloudsearch2.layer1 import Clo
+ 
+ from tests.unit import unittest, AWSMockServiceTestCase
+ from httpretty import HTTPretty
+-from mock import MagicMock
++try:
++    from mock import MagicMock
++except ImportError:
++    from unittest.mock import MagicMock
+ 
+ import json
+ 
+--- boto-2.49.0/tests/unit/cloudsearchdomain/test_cloudsearchdomain.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/cloudsearchdomain/test_cloudsearchdomain.py	2021-02-14 19:59:29.589668709 +0100
+@@ -1,6 +1,6 @@
+ #!/usr/bin env python
+ import json
+-import mock
++from tests.compat import mock
+ from tests.unit import AWSMockServiceTestCase
+ from boto.cloudsearch2.domain import Domain
+ from boto.cloudsearch2.layer1 import CloudSearchConnection
+--- boto-2.49.0/tests/unit/cloudsearch/test_document.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/cloudsearch/test_document.py	2021-02-14 20:00:44.145931469 +0100
+@@ -2,7 +2,10 @@
+ 
+ from tests.unit import unittest
+ from httpretty import HTTPretty
+-from mock import MagicMock
++try:
++    from mock import MagicMock
++except ImportError:
++    from unittest.mock import MagicMock
+ 
+ import json
+ 
+--- boto-2.49.0/tests/unit/dynamodb/test_layer2.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/dynamodb/test_layer2.py	2021-02-14 20:00:25.679364845 +0100
+@@ -22,7 +22,10 @@
+ #
+ 
+ from tests.unit import unittest
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ from boto.dynamodb.layer2 import Layer2
+ from boto.dynamodb.table import Table, Schema
+--- boto-2.49.0/tests/unit/ec2containerservice/test_connection.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/ec2containerservice/test_connection.py	2021-02-14 19:55:05.694431685 +0100
+@@ -20,7 +20,10 @@
+ # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ # IN THE SOFTWARE.
+ #
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ from tests.unit import unittest
+ 
+ import boto.ec2containerservice
+--- boto-2.49.0/tests/unit/ec2/test_connection.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/ec2/test_connection.py	2021-02-14 20:02:23.685392218 +0100
+@@ -1,6 +1,9 @@
+ #!/usr/bin/env python
+ from datetime import datetime, timedelta
+-from mock import MagicMock, Mock
++try:
++    from mock import MagicMock, Mock
++except ImportError:
++    from unittest.mock import MagicMock, Mock
+ from tests.unit import unittest
+ from tests.unit import AWSMockServiceTestCase
+ 
+--- boto-2.49.0/tests/unit/glacier/test_layer2.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/glacier/test_layer2.py	2021-02-14 19:58:41.029931779 +0100
+@@ -23,7 +23,10 @@
+ 
+ from tests.unit import unittest
+ 
+-from mock import call, Mock, patch, sentinel
++try:
++    from mock import call, Mock, patch, sentinel
++except ImportError:
++    from unittest.mock import call, Mock, patch, sentinel
+ 
+ import codecs
+ from boto.glacier.layer1 import Layer1
+--- boto-2.49.0/tests/unit/glacier/test_writer.py.orig	2018-07-11 22:41:30.000000000 +0200
++++ boto-2.49.0/tests/unit/glacier/test_writer.py	2021-02-14 19:59:16.493072992 +0100
+@@ -24,11 +24,19 @@ import itertools
+ from boto.compat import StringIO
+ 
+ from tests.unit import unittest
+-from mock import (
+-    call,
+-    Mock,
+-    sentinel,
+-)
++try:
++    from mock import (
++        call,
++        Mock,
++        sentinel,
++    )
++except ImportError:
++    from unittest.mock import (
++        call,
++        Mock,
++        sentinel,
++    )
++
+ from nose.tools import assert_equal
+ 
+ from boto.glacier.layer1 import Layer1
+--- boto-2.49.0/tests/unit/mws/test_connection.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/mws/test_connection.py	2021-02-14 19:57:56.120175076 +0100
+@@ -29,7 +29,10 @@ from tests.compat import unittest
+ 
+ from tests.unit import AWSMockServiceTestCase
+ 
+-from mock import MagicMock
++try:
++    from mock import MagicMock
++except ImportError:
++    from unittest.mock import MagicMock
+ 
+ 
+ class TestMWSConnection(AWSMockServiceTestCase):
+--- boto-2.49.0/tests/unit/s3/test_bucketlistresultset.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/s3/test_bucketlistresultset.py	2021-02-14 19:56:36.633939023 +0100
+@@ -22,7 +22,10 @@
+ # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ # IN THE SOFTWARE.
+ 
+-from mock import patch, Mock
++try:
++    from mock import patch, Mock
++except ImportError:
++    from unittest.mock import patch, Mock
+ import unittest
+ 
+ from boto.s3.bucket import ResultSet
+--- boto-2.49.0/tests/unit/s3/test_bucket.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/s3/test_bucket.py	2021-02-14 19:56:54.867173579 +0100
+@@ -1,5 +1,8 @@
+ # -*- coding: utf-8 -*-
+-from mock import patch
++try:
++    from mock import patch
++except ImportError:
++    from unittest.mock import patch
+ import xml.dom.minidom
+ 
+ from tests.unit import unittest
+--- boto-2.49.0/tests/unit/sns/test_connection.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/sns/test_connection.py	2021-02-14 19:57:21.567028933 +0100
+@@ -23,7 +23,10 @@
+ import json
+ from tests.unit import unittest
+ from tests.unit import AWSMockServiceTestCase
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ from boto.sns.connection import SNSConnection
+ 
+--- boto-2.49.0/tests/unit/sqs/test_queue.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/sqs/test_queue.py	2021-02-14 20:00:55.939200913 +0100
+@@ -20,7 +20,10 @@
+ # IN THE SOFTWARE.
+ #
+ from tests.unit import unittest
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ from boto.sqs.queue import Queue
+ 
+--- boto-2.49.0/tests/unit/swf/test_layer2_actors.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/swf/test_layer2_actors.py	2021-02-14 20:01:29.175687522 +0100
+@@ -1,7 +1,10 @@
+ import boto.swf.layer2
+ from boto.swf.layer2 import Decider, ActivityWorker
+ from tests.unit import unittest
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ 
+ class TestActors(unittest.TestCase):
+--- boto-2.49.0/tests/unit/swf/test_layer2_base.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/swf/test_layer2_base.py	2021-02-14 20:01:23.549051338 +0100
+@@ -1,7 +1,10 @@
+ import boto.swf.layer2
+ from boto.swf.layer2 import SWFBase
+ from tests.unit import unittest
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ 
+ MOCK_DOMAIN = 'Mock'
+--- boto-2.49.0/tests/unit/swf/test_layer2_domain.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/swf/test_layer2_domain.py	2021-02-14 20:01:54.462217200 +0100
+@@ -1,7 +1,10 @@
+ import boto.swf.layer2
+ from boto.swf.layer2 import Domain, ActivityType, WorkflowType, WorkflowExecution
+ from tests.unit import unittest
+-from mock import Mock
++try:
++    from mock import Mock
++except ImportError:
++    from unittest.mock import Mock
+ 
+ 
+ class TestDomain(unittest.TestCase):
+--- boto-2.49.0/tests/unit/swf/test_layer2_types.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/swf/test_layer2_types.py	2021-02-14 20:01:44.152273054 +0100
+@@ -1,7 +1,10 @@
+ import boto.swf.layer2
+ from boto.swf.layer2 import ActivityType, WorkflowType, WorkflowExecution
+ from tests.unit import unittest
+-from mock import Mock, ANY
++try:
++    from mock import Mock, ANY
++except ImportError:
++    from unittest.mock import Mock, ANY
+ 
+ 
+ class TestTypes(unittest.TestCase):
+--- boto-2.49.0/tests/unit/test_endpoints.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/test_endpoints.py	2021-02-14 19:58:14.186743868 +0100
+@@ -10,7 +10,7 @@
+ # distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF
+ # ANY KIND, either express or implied. See the License for the specific
+ # language governing permissions and limitations under the License.
+-import mock
++from tests.compat import mock
+ import os
+ import json
+ 
+--- boto-2.49.0/tests/unit/test_regioninfo.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/tests/unit/test_regioninfo.py	2021-02-14 19:59:40.419610038 +0100
+@@ -20,7 +20,7 @@
+ # IN THE SOFTWARE.
+ #
+ import os
+-import mock
++from tests.compat import mock
+ 
+ import boto
+ from boto.pyami.config import Config
