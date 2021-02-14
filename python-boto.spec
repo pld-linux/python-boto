@@ -23,6 +23,7 @@ URL:		https://github.com/boto/boto
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
 %if %{with tests}
+BuildRequires:	python-httpretty
 BuildRequires:	python-mock
 BuildRequires:	python-nose
 %endif
@@ -31,6 +32,7 @@ BuildRequires:	python-nose
 BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	python3-setuptools
 %if %{with tests}
+BuildRequires:	python3-httpretty
 BuildRequires:	python3-nose
 %endif
 %endif
