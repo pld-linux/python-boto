@@ -10,7 +10,7 @@ Summary:	An integrated interface to infrastructural services offered by Amazon W
 Summary(pl.UTF-8):	Zintegrowany interfejs do usług infrastruktury oferowanych przez usługi WWW Amazon
 Name:		python-%{module}
 Version:	2.49.0
-Release:	5
+Release:	6
 License:	MIT
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/boto/
@@ -18,6 +18,26 @@ Source0:	https://files.pythonhosted.org/packages/source/b/boto/boto-%{version}.t
 # Source0-md5:	e9b79f80198da059d9a8055a5352fd6d
 Patch0:		%{name}-mock.patch
 Patch1:		%{name}-py3.patch
+# https://github.com/boto/boto/pull/3086 (unbundle six)
+Patch2:		boto-devendor.patch
+# https://github.com/boto/boto/pull/3472
+Patch3:		boto-nat-gateway.patch
+# https://github.com/boto/boto/pull/3506
+# https://github.com/boto/boto/pull/3508
+Patch4:		boto-retry-float.patch
+# https://github.com/boto/boto/pull/3332
+Patch5:		boto-aws-exec-read.patch
+# https://github.com/boto/boto/pull/3077
+# https://github.com/boto/boto/pull/3131
+Patch6:		boto-instance-attributes.patch
+# https://github.com/boto/boto/pull/2882
+Patch7:		boto-multi-vpc-zone.patch
+# https://github.com/boto/boto/pull/2875
+Patch8:		boto-s3-requestlog.patch
+# https://github.com/boto/boto/pull/2866
+Patch9:		boto-route53-no-resourcepath.patch
+# https://github.com/boto/boto/pull/3111
+Patch10:	boto-modifysubnetattribute.patch
 URL:		https://github.com/boto/boto
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.6
@@ -105,18 +125,27 @@ Dokumentacja API modułu Pythona boto.
 %setup -q -n %{module}-%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
+%patch8 -p1
+%patch9 -p1
+%patch10 -p1
 
 %build
-%if %{with python3}
-%py3_build
+%if %{with python2}
+%py_build
 
 %if %{with tests}
 nosetests-%{py_ver} tests/unit -a '!notdefault'
 %endif
 %endif
 
-%if %{with python2}
-%py_build
+%if %{with python3}
+%py3_build
 
 %if %{with tests}
 nosetests-%{py3_ver} tests/unit -a '!notdefault'

@@ -51,3 +51,49 @@
          if len(self._nodepath) == 0:
              return
          obj = None
+--- boto-2.49.0/boto/dynamodb/types.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/boto/dynamodb/types.py	2023-10-22 19:38:05.007899677 +0200
+@@ -27,7 +27,7 @@ Python types and vice-versa.
+ import base64
+ from decimal import (Decimal, DecimalException, Context,
+                      Clamped, Overflow, Inexact, Underflow, Rounded)
+-from collections import Mapping
++from six.moves.collections_abc import Mapping
+ from boto.dynamodb.exceptions import DynamoDBNumberError
+ from boto.compat import filter, map, six, long_type
+ 
+--- boto-2.49.0/boto/mws/connection.py.orig	2018-07-11 19:35:36.000000000 +0200
++++ boto-2.49.0/boto/mws/connection.py	2023-10-22 19:44:26.409166783 +0200
+@@ -21,13 +21,13 @@
+ import xml.sax
+ import hashlib
+ import string
+-import collections
+ from boto.connection import AWSQueryConnection
+ from boto.exception import BotoServerError
+ import boto.mws.exception
+ import boto.mws.response
+ from boto.handler import XmlHandler
+ from boto.compat import filter, map, six, encodebytes
++from six.moves import collections_abc
+ 
+ __all__ = ['MWSConnection']
+ 
+@@ -109,7 +109,7 @@ def http_body(field):
+ def destructure_object(value, into, prefix, members=False):
+     if isinstance(value, boto.mws.response.ResponseElement):
+         destructure_object(value.__dict__, into, prefix, members=members)
+-    elif isinstance(value, collections.Mapping):
++    elif isinstance(value, collections_abc.Mapping):
+         for name in value:
+             if name.startswith('_'):
+                 continue
+@@ -117,7 +117,7 @@ def destructure_object(value, into, pref
+                                members=members)
+     elif isinstance(value, six.string_types):
+         into[prefix] = value
+-    elif isinstance(value, collections.Iterable):
++    elif isinstance(value, collections_abc.Iterable):
+         for index, element in enumerate(value):
+             suffix = (members and '.member.' or '.') + str(index + 1)
+             destructure_object(element, into, prefix + suffix,
